@@ -10,5 +10,19 @@ terraform {
     ibm = {
       source = "IBM-Cloud/ibm"
     }
+    kubernetes = {
+      source = "hashicorp/kubernetes"
+    }
   }
 }
+
+provider "kubernetes" {
+  config_path = data.ibm_container_cluster_config.cluster_foo.config_file_path
+}
+
+resource "kubernetes_namespace" "example" {
+  metadata {
+    name = "terraform-example-namespace"
+  }
+}
+

@@ -1,5 +1,6 @@
 data "ibm_container_cluster_config" "cluster_foo" {
   cluster_name_id = var.cluster
+  admin = true
 }
 variable "cluster" {
 }
@@ -19,7 +20,6 @@ terraform {
 
 provider "kubernetes" {
   config_path = data.ibm_container_cluster_config.cluster_foo.config_file_path
-  admin = true
 }
 
 resource "kubernetes_namespace" "example" {
